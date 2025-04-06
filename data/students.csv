@@ -1,0 +1,4 @@
+student_id,completed_courses,current_semester,career_goals,preferred_subjects,time_constraints,enrollment_status,min_credits,max_credits
+S1001,"CS101,MATH101",3,"Software Developer,Web Developer","Computer Science,Mathematics",MWF 10:00-11:00:true;TTh 14:00-15:30:false,Full-time,12,18
+S1002,"CS101,MATH101,CS201",4,"Data Scientist,AI Engineer","Data Science,Mathematics,Statistics",MWF 09:00-10:00:true;TTh 13:00-14:30:true,Full-time,12,16
+S1003,CS101,2,"Web Developer,UX Designer","Web Development,Design",MWF 13:00-14:00:true;TTh 10:00-11:30:true,Part-time,6,9
