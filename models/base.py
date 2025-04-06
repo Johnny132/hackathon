@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 @dataclass
 class Course:
@@ -12,11 +12,11 @@ class Course:
     skills_taught: List[str]
     career_relevance: List[str]
     
-    prerequisites: List[str] = None
-    terms_offered: List[str] = None
-    available_slots: Dict[str, int] = None
+    prerequisites: Optional[List[str]] = None
+    terms_offered: Optional[List[str]] = None
+    available_slots: Optional[Dict[str, int]] = None
     
     def is_eligible(self, completed_courses: List[str]) -> bool:
-        if self.prerequisites is None:
+        if not self.prerequisites:
             return True
         return all(prereq in completed_courses for prereq in self.prerequisites)

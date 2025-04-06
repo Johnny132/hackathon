@@ -77,70 +77,50 @@ class AIProcessor:
         return True
         
     def process_student_input(self, text: str) -> Dict[str, List[str]]:
-        """
-        Process student input text using Ollama to extract key information about
-        career goals, preferred subjects, and time constraints.
-        
-        Args:
-            text: The raw text input from the student
-            
-        Returns:
-            Dictionary containing extracted information
-        """
+        """Process student input with better extraction of majors and minors"""
         prompt = f"""
         Extract the following information from the student's input text:
         
         1. Career goals: What profession or job roles do they want to pursue?
         2. Preferred subjects: What academic subjects or topics are they interested in?
-        3. Time constraints: When are they available for classes or what scheduling preferences do they have?
+        3. Major/Minor interests: Are they asking about specific majors or minors?
+        4. Time constraints: Any scheduling preferences?
         
         Student input: "{text}"
         
-        Format your response as a JSON object with these three keys. Each key should have an array of strings as its value.
-        If no information is provided for a category, return an empty array.
+        Format your response as a JSON object. If they mention wanting to major or minor in a subject,
+        be sure to include that subject in the preferred_subjects array.
         
-        Example response format:
+        Example format:
         {{
             "career_goals": ["Data Scientist", "Machine Learning Engineer"],
-            "preferred_subjects": ["Statistics", "Computer Science", "Mathematics"],
-            "time_constraints": ["Available mornings", "No classes on Friday"]
+            "preferred_subjects": ["Statistics", "Computer Science", "Business"],
+            "time_constraints": ["Available mornings"]
         }}
-        
-        Only respond with the JSON object, no other text.
         """
         
         data = {
             "model": self.model,
             "prompt": prompt,
             "stream": False,
-            "options": {
-                "temperature": 0.1,  # Lower temperature for more deterministic outputs
-                "num_predict": 1000  # Limit token generation
-            }
+            "options": {"temperature": 0.1}
         }
         
         try:
             response = requests.post(self.generate_url, json=data, timeout=60)
             response.raise_for_status()
             response_data = response.json()
+            content = response_data.get('response', '{}').strip()
             
-            # Parse the JSON response from Ollama
-            content = response_data.get('response', '{}')
-            
-            # Clean up the response in case the model adds extra text
-            content = content.strip()
-            
-            # If the response is wrapped in code blocks, remove them
+            # Clean and parse response
             if content.startswith("```json"):
                 content = content.strip("```json").strip()
             elif content.startswith("```"):
                 content = content.strip("```").strip()
             
-            # Try to parse the JSON
             try:
                 extracted_info = json.loads(content)
             except json.JSONDecodeError:
-                # If JSON parsing fails, try to find a JSON block in the text
                 import re
                 json_pattern = r'\{[\s\S]*\}'
                 match = re.search(json_pattern, content)
@@ -152,18 +132,15 @@ class AIProcessor:
                 else:
                     extracted_info = {}
             
-            # Ensure expected keys exist
-            expected_keys = ["career_goals", "preferred_subjects", "time_constraints"]
-            for key in expected_keys:
+            # Ensure expected keys
+            for key in ["career_goals", "preferred_subjects", "time_constraints"]:
                 if key not in extracted_info:
                     extracted_info[key] = []
             
             return extracted_info
-            
-        except requests.exceptions.RequestException as e:
+                
+        except Exception as e:
             print(f"API request error: {e}")
-        except ValueError as e:
-            print(f"Error processing AI response: {e}")
         
         return {
             "career_goals": [],

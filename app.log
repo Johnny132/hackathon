@@ -505,3 +505,234 @@ This course uses mathematical modeling techniques to analyze and solve problems 
 This course explores the biological principles and processes that affect human health, behavior, and disease. Would you like to learn more about this course or explore other options?
 2025-04-06 01:31:39,587 - INFO - Extracted info: {'career_goals': [], 'preferred_subjects': ['Science'], 'time_constraints': []}
 2025-04-06 01:31:39,588 - INFO - 127.0.0.1 - - [06/Apr/2025 01:31:39] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:14:14,432 - INFO - Course selection system initialized successfully
+2025-04-06 12:14:14,443 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 12:14:14,443 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 12:15:33,091 - INFO - 127.0.0.1 - - [06/Apr/2025 12:15:33] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 12:15:41,351 - INFO - 127.0.0.1 - - [06/Apr/2025 12:15:41] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:16:51,886 - INFO - 127.0.0.1 - - [06/Apr/2025 12:16:51] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:17:12,031 - INFO - 127.0.0.1 - - [06/Apr/2025 12:17:12] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:22:20,177 - INFO - 127.0.0.1 - - [06/Apr/2025 12:22:20] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:22:52,310 - INFO - 127.0.0.1 - - [06/Apr/2025 12:22:52] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:27:25,244 - INFO - 127.0.0.1 - - [06/Apr/2025 12:27:25] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:28:29,898 - INFO - 127.0.0.1 - - [06/Apr/2025 12:28:29] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:28:45,677 - INFO - 127.0.0.1 - - [06/Apr/2025 12:28:45] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:28:57,854 - INFO - 127.0.0.1 - - [06/Apr/2025 12:28:57] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:29:08,156 - INFO - 127.0.0.1 - - [06/Apr/2025 12:29:08] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 12:39:24,231 - ERROR - Error initializing system: type object 'CourseEnhancementCache' has no attribute 'get_enhancement'
+2025-04-06 12:39:24,233 - ERROR - Failed to initialize the course selection system
+2025-04-06 12:43:09,399 - ERROR - Error initializing system: 'CourseSelector' object has no attribute 'add_course'
+2025-04-06 12:43:09,400 - ERROR - Failed to initialize the course selection system
+2025-04-06 12:44:52,279 - ERROR - Error initializing system: 'CourseSelector' object has no attribute 'add_course'
+2025-04-06 12:44:52,280 - ERROR - Failed to initialize the course selection system
+2025-04-06 12:45:05,651 - INFO - Course selection system initialized successfully
+2025-04-06 12:45:05,660 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 12:45:05,660 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 12:45:18,863 - ERROR - Error processing chatbot input: type object 'CourseRecommendationCache' has no attribute 'get_cached_recommendations'
+2025-04-06 12:45:18,864 - INFO - 127.0.0.1 - - [06/Apr/2025 12:45:18] "[35m[1mPOST /api/chatbot/process HTTP/1.1[0m" 500 -
+2025-04-06 12:45:22,753 - INFO - 127.0.0.1 - - [06/Apr/2025 12:45:22] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 12:45:28,260 - ERROR - Error processing chatbot input: 'CourseRecommendationAPI' object has no attribute '_generate_recommendation_reason'
+2025-04-06 12:45:28,261 - INFO - 127.0.0.1 - - [06/Apr/2025 12:45:28] "[35m[1mPOST /api/chatbot/process HTTP/1.1[0m" 500 -
+2025-04-06 12:50:20,468 - INFO - Course selection system initialized successfully
+2025-04-06 12:50:20,479 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 12:50:20,479 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 12:50:42,886 - ERROR - Error processing chatbot input: 'career_goals'
+2025-04-06 12:50:42,887 - INFO - 127.0.0.1 - - [06/Apr/2025 12:50:42] "[35m[1mPOST /api/chatbot/process HTTP/1.1[0m" 500 -
+2025-04-06 13:01:09,922 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:01:09,922 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:01:09,991 - INFO - Enhancing 7803 courses...
+2025-04-06 13:01:10,025 - INFO - Added 7803 courses to selector
+2025-04-06 13:01:10,025 - INFO - Course recommendation API initialized
+2025-04-06 13:01:10,029 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:01:10,030 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:01:10,090 - INFO - Enhancing 7803 courses...
+2025-04-06 13:01:10,114 - INFO - Added 7803 courses to selector
+2025-04-06 13:01:10,117 - INFO - Course recommendation API initialized
+2025-04-06 13:01:10,118 - INFO - Course selection system initialized successfully
+2025-04-06 13:01:10,127 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 13:01:10,127 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 13:01:31,499 - ERROR - Unexpected error generating recommendations: unhashable type: 'Course'
+2025-04-06 13:01:31,500 - ERROR - Traceback (most recent call last):
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 128, in generate_recommendations
+    recommendations = self._generate_smart_recommendations(extracted_info)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 202, in _generate_smart_recommendations
+    course_scores[course] = score
+    ~~~~~~~~~~~~~^^^^^^^^
+TypeError: unhashable type: 'Course'
+
+2025-04-06 13:01:31,501 - ERROR - Error processing chatbot input: 'Course' object has no attribute 'get'
+2025-04-06 13:01:31,501 - INFO - 127.0.0.1 - - [06/Apr/2025 13:01:31] "[35m[1mPOST /api/chatbot/process HTTP/1.1[0m" 500 -
+2025-04-06 13:04:42,317 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:04:42,317 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:04:42,387 - INFO - Enhancing 7803 courses...
+2025-04-06 13:04:42,422 - INFO - Added 7803 courses to selector
+2025-04-06 13:04:42,422 - INFO - Course recommendation API initialized
+2025-04-06 13:04:42,426 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:04:42,427 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:04:42,488 - INFO - Enhancing 7803 courses...
+2025-04-06 13:04:42,511 - INFO - Added 7803 courses to selector
+2025-04-06 13:04:42,514 - INFO - Course recommendation API initialized
+2025-04-06 13:04:42,514 - INFO - Course selection system initialized successfully
+2025-04-06 13:04:42,523 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 13:04:42,523 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 13:04:55,271 - ERROR - Unexpected error generating recommendations: list index out of range
+2025-04-06 13:04:55,271 - ERROR - Traceback (most recent call last):
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 79, in generate_recommendations
+    extracted_info.get('career_goals', [None])[0] or
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+2025-04-06 13:04:55,272 - ERROR - Error processing chatbot input: 'Course' object has no attribute 'get'
+2025-04-06 13:04:55,273 - INFO - 127.0.0.1 - - [06/Apr/2025 13:04:55] "[35m[1mPOST /api/chatbot/process HTTP/1.1[0m" 500 -
+2025-04-06 13:05:57,029 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:05:57,029 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:05:57,100 - INFO - Enhancing 7803 courses...
+2025-04-06 13:05:57,135 - INFO - Added 7803 courses to selector
+2025-04-06 13:05:57,135 - INFO - Course recommendation API initialized
+2025-04-06 13:05:57,140 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:05:57,140 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:05:57,201 - INFO - Enhancing 7803 courses...
+2025-04-06 13:05:57,224 - INFO - Added 7803 courses to selector
+2025-04-06 13:05:57,227 - INFO - Course recommendation API initialized
+2025-04-06 13:05:57,227 - INFO - Course selection system initialized successfully
+2025-04-06 13:05:57,236 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 13:05:57,236 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 13:06:05,367 - ERROR - Unexpected error generating recommendations: list index out of range
+2025-04-06 13:06:05,368 - ERROR - Traceback (most recent call last):
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 79, in generate_recommendations
+    extracted_info.get('career_goals', [None])[0] or
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+2025-04-06 13:06:05,369 - INFO - 127.0.0.1 - - [06/Apr/2025 13:06:05] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 13:06:17,911 - ERROR - Unexpected error generating recommendations: unhashable type: 'Course'
+2025-04-06 13:06:17,911 - ERROR - Traceback (most recent call last):
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 94, in generate_recommendations
+    recommendations = self._generate_smart_recommendations(extracted_info)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 168, in _generate_smart_recommendations
+    course_scores[course] = score
+    ~~~~~~~~~~~~~^^^^^^^^
+TypeError: unhashable type: 'Course'
+
+2025-04-06 13:06:17,913 - INFO - 127.0.0.1 - - [06/Apr/2025 13:06:17] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 13:07:17,603 - ERROR - Unexpected error generating recommendations: list index out of range
+2025-04-06 13:07:17,603 - ERROR - Traceback (most recent call last):
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 79, in generate_recommendations
+    extracted_info.get('career_goals', [None])[0] or
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+2025-04-06 13:07:17,604 - INFO - 127.0.0.1 - - [06/Apr/2025 13:07:17] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 13:09:12,842 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:09:12,842 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:09:12,912 - INFO - Enhancing 7803 courses...
+2025-04-06 13:09:12,946 - INFO - Added 7803 courses to selector
+2025-04-06 13:09:12,946 - INFO - Course recommendation API initialized
+2025-04-06 13:09:12,950 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:09:12,950 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:09:13,011 - INFO - Enhancing 7803 courses...
+2025-04-06 13:09:13,034 - INFO - Added 7803 courses to selector
+2025-04-06 13:09:13,037 - INFO - Course recommendation API initialized
+2025-04-06 13:09:13,038 - INFO - Course selection system initialized successfully
+2025-04-06 13:09:13,046 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 13:09:13,046 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 13:09:20,418 - INFO - 127.0.0.1 - - [06/Apr/2025 13:09:20] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 13:11:56,090 - ERROR - Unexpected error generating recommendations: list index out of range
+2025-04-06 13:11:56,091 - ERROR - Traceback (most recent call last):
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 79, in generate_recommendations
+    extracted_info.get('career_goals', [None])[0] or
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+2025-04-06 13:11:56,095 - INFO - 127.0.0.1 - - [06/Apr/2025 13:11:56] "POST /api/chatbot/process HTTP/1.1" 200 -
+2025-04-06 13:12:56,360 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:12:56,360 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:12:56,431 - INFO - Enhancing 7803 courses...
+2025-04-06 13:12:56,465 - INFO - Added 7803 courses to selector
+2025-04-06 13:12:56,465 - INFO - Course recommendation API initialized
+2025-04-06 13:12:56,469 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:12:56,470 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:12:56,532 - INFO - Enhancing 7803 courses...
+2025-04-06 13:12:56,556 - INFO - Added 7803 courses to selector
+2025-04-06 13:12:56,559 - INFO - Course recommendation API initialized
+2025-04-06 13:12:56,559 - INFO - Course selection system initialized successfully
+2025-04-06 13:12:56,568 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 13:12:56,568 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 13:13:00,710 - INFO - 127.0.0.1 - - [06/Apr/2025 13:13:00] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 13:13:00,795 - INFO - 127.0.0.1 - - [06/Apr/2025 13:13:00] "[36mGET /static/IU%20Clock%20Clear.jpg HTTP/1.1[0m" 304 -
+2025-04-06 13:15:55,579 - INFO - 127.0.0.1 - - [06/Apr/2025 13:15:55] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 13:15:55,625 - INFO - 127.0.0.1 - - [06/Apr/2025 13:15:55] "[36mGET /static/IU%20Clock%20Clear.jpg HTTP/1.1[0m" 304 -
+2025-04-06 13:15:56,428 - INFO - 127.0.0.1 - - [06/Apr/2025 13:15:56] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 13:15:56,471 - INFO - 127.0.0.1 - - [06/Apr/2025 13:15:56] "[36mGET /static/IU%20Clock%20Clear.jpg HTTP/1.1[0m" 304 -
+2025-04-06 13:15:57,278 - INFO - 127.0.0.1 - - [06/Apr/2025 13:15:57] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 13:15:57,323 - INFO - 127.0.0.1 - - [06/Apr/2025 13:15:57] "[36mGET /static/IU%20Clock%20Clear.jpg HTTP/1.1[0m" 304 -
+2025-04-06 13:16:04,775 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:16:04,775 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:16:04,845 - INFO - Enhancing 7803 courses...
+2025-04-06 13:16:04,881 - INFO - Added 7803 courses to selector
+2025-04-06 13:16:04,881 - INFO - Course recommendation API initialized
+2025-04-06 13:16:04,885 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:16:04,885 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:16:04,947 - INFO - Enhancing 7803 courses...
+2025-04-06 13:16:04,971 - INFO - Added 7803 courses to selector
+2025-04-06 13:16:04,974 - INFO - Course recommendation API initialized
+2025-04-06 13:16:04,974 - INFO - Course selection system initialized successfully
+2025-04-06 13:16:04,983 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 13:16:04,983 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 13:16:08,611 - INFO - 127.0.0.1 - - [06/Apr/2025 13:16:08] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 13:16:08,688 - INFO - 127.0.0.1 - - [06/Apr/2025 13:16:08] "[36mGET /static/IU%20Clock%20Clear.jpg HTTP/1.1[0m" 304 -
+2025-04-06 13:17:54,824 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:17:54,824 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:17:54,895 - INFO - Enhancing 7803 courses...
+2025-04-06 13:17:54,929 - INFO - Added 7803 courses to selector
+2025-04-06 13:17:54,929 - INFO - Course recommendation API initialized
+2025-04-06 13:17:54,933 - INFO - AI Processor initialized with model: llama3:latest
+2025-04-06 13:17:54,933 - INFO - Looking for courses file at: C:\Users\jdkak\Documents\GitHub\hackathon\data\courses.csv
+2025-04-06 13:17:54,995 - INFO - Enhancing 7803 courses...
+2025-04-06 13:17:55,018 - INFO - Added 7803 courses to selector
+2025-04-06 13:17:55,020 - INFO - Course recommendation API initialized
+2025-04-06 13:17:55,021 - INFO - Course selection system initialized successfully
+2025-04-06 13:17:55,032 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.21.217.202:5000
+2025-04-06 13:17:55,032 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 13:17:58,805 - INFO - 127.0.0.1 - - [06/Apr/2025 13:17:58] "GET /chatbot HTTP/1.1" 200 -
+2025-04-06 13:17:58,894 - INFO - 127.0.0.1 - - [06/Apr/2025 13:17:58] "[36mGET /static/IU%20Clock%20Clear.jpg HTTP/1.1[0m" 304 -
+2025-04-06 13:18:05,380 - ERROR - Unexpected error generating recommendations: list index out of range
+2025-04-06 13:18:05,381 - ERROR - Traceback (most recent call last):
+  File "c:\Users\jdkak\Documents\GitHub\hackathon\app.py", line 79, in generate_recommendations
+    extracted_info.get('career_goals', [None])[0] or
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+2025-04-06 13:18:05,382 - INFO - 127.0.0.1 - - [06/Apr/2025 13:18:05] "POST /api/chatbot/process HTTP/1.1" 200 -

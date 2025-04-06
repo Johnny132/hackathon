@@ -67,110 +67,72 @@ def parse_course_level(level_str: str) -> int:
         logging.warning(f"Could not parse level from '{level_str}'. Using default level 100.")
         return 100
 
-def load_courses_from_csv(file_path: str, ai_processor=None) -> List[Course]:
-    """
-    Load course data from a CSV file with robust error handling
-    
-    Args:
-        file_path (str): Path to the courses CSV
-        ai_processor (AIProcessor, optional): AI processor for enhancing course data
-    
-    Returns:
-        List[Course]: List of loaded and potentially enhanced courses
-    """
-    # Configure logging
-    logging.basicConfig(
-        level=logging.INFO, 
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        filename='course_loading.log',
-        filemode='w'
-    )
-    
+import csv
+import os
+from typing import List
+from models.base import Course
+
+def load_courses_from_csv(file_path: str) -> List[Course]:
+    """Load course data from CSV with detailed error handling"""
+    print(f"Loading courses from: {file_path}")
     courses = []
     
     if not os.path.exists(file_path):
-        logging.error(f"File not found: {file_path}")
+        print(f"Error: File not found: {file_path}")
         return courses
     
     try:
-        # Try different encodings
-        encodings_to_try = ['utf-8', 'latin-1', 'cp1252', 'iso-8859-1']
-        
-        for encoding in encodings_to_try:
-            try:
-                with open(file_path, 'r', newline='', encoding=encoding) as csvfile:
-                    reader = csv.DictReader(csvfile)
-                    
-                    for row in reader:
-                        try:
-                            # Clean and parse credits 
-                            credits = clean_credits_string(row['credits'])
-                            
-                            # Parse level with robust method
-                            level = parse_course_level(row['level'])
-                            
-                            # Clean description
-                            description = row.get('description', '').replace('Course Description: ', '').strip()
-                            
-                            # Parse terms offered
-                            terms_offered = row.get('terms_offered', '').replace('Typically Offered: ', '').split(', ') if row.get('terms_offered') else []
-                            
-                            # Try to parse prerequisites if exists
-                            prerequisites = row.get('prerequisites', '').split(',') if row.get('prerequisites') else []
-                            
-                            # Create course object with default empty lists for optional fields
-                            course = Course(
-                                course_id=row['course_id'],
-                                title=row['title'],
-                                description=description,
-                                credits=credits,
-                                department=row['department'],
-                                level=level,
-                                terms_offered=terms_offered,
-                                skills_taught=['Problem Solving'],  # Default skills
-                                career_relevance=['Professional Development'],  # Default career relevance
-                                prerequisites=prerequisites
-                            )
-                            
-                            courses.append(course)
-                        
-                        except Exception as e:
-                            logging.error(f"Error processing course row: {str(e)}")
-                            logging.error(f"Problem row: {row}")
-                            # Continue with the next row
-                
-                # If we successfully read the file, break the encoding loop
-                if courses:
-                    break
+        with open(file_path, 'r', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            print(f"CSV headers: {reader.fieldnames}")
             
-            except UnicodeDecodeError:
-                # Try next encoding if current one fails
-                continue
-        
-        # Enhance courses with AI if processor is available
-        if ai_processor and courses:
-            # Ensure AI response method exists
-            add_ai_response_method(AIProcessor)
-            
-            # Enhance each course individually
-            enhanced_courses = []
-            for course in courses:
+            row_count = 0
+            for row in reader:
                 try:
-                    enhanced_course = enhance_course_data(course, ai_processor)
-                    enhanced_courses.append(enhanced_course)
+                    row_count += 1
+                    
+                    # Parse credits
+                    try:
+                        credits = int(row.get('credits', '3'))
+                    except (ValueError, TypeError):
+                        credits = 3
+                    
+                    # Parse level
+                    try:
+                        level = int(row.get('level', '100'))
+                    except (ValueError, TypeError):
+                        level = 100
+                    
+                    # Parse lists
+                    prerequisites = row.get('prerequisites', '').split(',') if row.get('prerequisites') else []
+                    prerequisites = [p.strip() for p in prerequisites if p.strip()]
+                    
+                    skills = row.get('skills_taught', '').split(',') if row.get('skills_taught') else ['Problem Solving']
+                    skills = [s.strip() for s in skills if s.strip()]
+                    
+                    careers = row.get('career_relevance', '').split(',') if row.get('career_relevance') else ['Professional Development']
+                    careers = [c.strip() for c in careers if c.strip()]
+                    
+                    course = Course(
+                        course_id=row['course_id'],
+                        title=row['title'],
+                        description=row.get('description', ''),
+                        credits=credits,
+                        department=row.get('department', ''),
+                        level=level,
+                        prerequisites=prerequisites,
+                        skills_taught=skills,
+                        career_relevance=careers
+                    )
+                    courses.append(course)
                 except Exception as e:
-                    logging.error(f"Error enhancing course {course.course_id}: {str(e)}")
-                    # Fall back to original course if enhancement fails
-                    enhanced_courses.append(course)
+                    print(f"Error processing row {row_count}: {e}")
             
-            courses = enhanced_courses
-        
-        logging.info(f"Successfully loaded {len(courses)} courses")
-        return courses
-    
+            print(f"Successfully loaded {len(courses)} courses out of {row_count} rows")
     except Exception as e:
-        logging.error(f"Unexpected error reading courses from {file_path}: {str(e)}")
-        return []
+        print(f"Error reading CSV file: {e}")
+    
+    return courses
 
 def load_students_from_csv(file_path: str) -> List[StudentProfile]:
     """

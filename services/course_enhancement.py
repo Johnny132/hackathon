@@ -1,15 +1,14 @@
 import os
-import json
-import logging
 from typing import Dict, Any, List
 from models.base import Course
+import json
 
-# Default values
 DEFAULT_SKILLS = ["Critical Thinking", "Problem Solving"]
 DEFAULT_CAREER_PATHS = ["Professional Development"]
 
 class CourseEnhancementCache:
     CACHE_FILE = 'data/course_enhancements_cache.json'
+    _cache = {}
     
     @classmethod
     def load_cache(cls) -> Dict[str, Dict[str, Any]]:
@@ -20,236 +19,86 @@ class CourseEnhancementCache:
             # Ensure directory exists
             os.makedirs(os.path.dirname(cls.CACHE_FILE), exist_ok=True)
             
-            print(f"Attempting to load cache from: {cls.CACHE_FILE}")
-            print(f"File exists: {os.path.exists(cls.CACHE_FILE)}")
-            
             if os.path.exists(cls.CACHE_FILE):
                 with open(cls.CACHE_FILE, 'r', encoding='utf-8') as f:
-                    cache_content = json.load(f)
-                    print(f"Loaded cache with {len(cache_content)} entries")
-                    return cache_content
+                    cls._cache = json.load(f)
             else:
-                print("No existing cache file found. Returning empty cache.")
-                return {}
+                cls._cache = {}
+            
+            return cls._cache
         except Exception as e:
-            print(f"CRITICAL ERROR loading course enhancement cache: {e}")
-            import traceback
-            traceback.print_exc()
+            print(f"Error loading course enhancement cache: {e}")
             return {}
     
     @classmethod
-    def save_cache(cls, cache: Dict[str, Dict[str, Any]]):
+    def save_cache(cls):
         """
-        Save course enhancements to cache file with extensive logging
+        Save course enhancements to cache file
         """
         try:
             # Explicitly create directory
             os.makedirs(os.path.dirname(cls.CACHE_FILE), exist_ok=True)
             
-            print(f"Attempting to save cache to: {cls.CACHE_FILE}")
-            print(f"Cache entries to save: {len(cache)}")
-            
             with open(cls.CACHE_FILE, 'w', encoding='utf-8') as f:
-                json.dump(cache, f, indent=2)
-            
-            # Verify file was created
-            print(f"Cache file created/updated at: {cls.CACHE_FILE}")
-            print(f"File exists after save: {os.path.exists(cls.CACHE_FILE)}")
+                json.dump(cls._cache, f, indent=2)
         except Exception as e:
-            print(f"CRITICAL ERROR saving course enhancement cache: {e}")
-            import traceback
-            traceback.print_exc()
+            print(f"Error saving course enhancement cache: {e}")
     
     @classmethod
     def get_enhancement(cls, course_id: str) -> Dict[str, Any]:
         """
-        Retrieve enhancement for a specific course with logging
+        Retrieve enhancement for a specific course
         """
-        cache = cls.load_cache()
-        enhancement = cache.get(course_id, {})
-        print(f"Retrieving enhancement for {course_id}: {'Found' if enhancement else 'Not Found'}")
-        return enhancement
+        # Ensure cache is loaded
+        if not cls._cache:
+            cls.load_cache()
+        
+        # Return enhancement or empty dict
+        return cls._cache.get(course_id, {})
     
     @classmethod
     def update_enhancement(cls, course_id: str, enhancement_data: Dict[str, Any]):
         """
-        Update enhancement for a specific course with logging
+        Update enhancement for a specific course
         """
-        print(f"Attempting to update cache for course: {course_id}")
-        print(f"Enhancement data: {enhancement_data}")
-        
-        # Load existing cache
-        cache = cls.load_cache()
+        # Ensure cache is loaded
+        if not cls._cache:
+            cls.load_cache()
         
         # Update the specific course
-        cache[course_id] = enhancement_data
+        cls._cache[course_id] = enhancement_data
         
         # Save updated cache
-        cls.save_cache(cache)
+        cls.save_cache()
 
-def enhance_course_data(course: Course, ai_processor=None) -> Course:
+def enhance_course_data(course: Course) -> Course:
     """
-    Enhance course data with caching mechanism
-    
-    Args:
-        course (Course): Course to enhance
-        ai_processor (AIProcessor, optional): AI processor for generating enhancements
-    
-    Returns:
-        Course with enhanced data
+    Enhance course data with caching mechanism and infinite loop prevention
     """
-    # Add extensive print statements for debugging
-    print(f"Processing course enhancement for: {course.course_id}")
-    print(f"Course title: {course.title}")
-    
-    # Check cache first
+    # Check if we've already enhanced this course
     cached_enhancement = CourseEnhancementCache.get_enhancement(course.course_id)
     
     if cached_enhancement:
-        print(f"Using cached enhancement for {course.course_id}")
+        # Use cached data
         course.skills_taught = cached_enhancement.get('skills_taught', DEFAULT_SKILLS)
         course.career_relevance = cached_enhancement.get('career_relevance', DEFAULT_CAREER_PATHS)
         return course
     
-    # If no cache and no AI processor, use defaults
-    if not ai_processor:
+    # No cache hit - use defaults
+    if not course.skills_taught:
         course.skills_taught = DEFAULT_SKILLS
-        course.career_relevance = DEFAULT_CAREER_PATHS
-        return course
     
-    # Generate enhancement via AI
-    try:
-        # Create prompt for AI to generate skills taught and career relevance
-        prompt = f"""
-        Analyze the following course details and provide:
-        1. A list of 3-5 specific skills students would learn from this course
-        2. A list of 2-4 career paths where these skills would be relevant
-
-        Course Information:
-        - Course ID: {course.course_id}
-        - Title: {course.title}
-        - Description: {course.description}
-        - Department: {course.department}
-        - Level: {course.level} (100=freshman, 200=sophomore, 300=junior, 400=senior)
-
-        Format your response as a JSON object with two keys:
-        {{
-            "skills_taught": ["Skill1", "Skill2", "Skill3"],
-            "career_relevance": ["Career Path 1", "Career Path 2"]
-        }}
-        
-        Only respond with the JSON object, no additional text.
-        """
-        
-        # Use AI to generate enhancement
-        data = {
-            "model": ai_processor.model,
-            "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.3,
-                "num_predict": 1000
-            }
-        }
-        
-        response = ai_processor._get_ai_response(data)
-        
-        # Clean and parse response
-        response = response.strip()
-        if response.startswith("```json"):
-            response = response.strip("```json").strip()
-        elif response.startswith("```"):
-            response = response.strip("```").strip()
-        
-        # Parse JSON
-        try:
-            enhancement = json.loads(response)
-            
-            # Extract skills and career paths with fallbacks
-            skills = enhancement.get('skills_taught', DEFAULT_SKILLS)
-            career_paths = enhancement.get('career_relevance', DEFAULT_CAREER_PATHS)
-            
-            # Update course
-            course.skills_taught = skills
-            course.career_relevance = career_paths
-            
-            # Cache the enhancement
-            CourseEnhancementCache.update_enhancement(course.course_id, {
-                'skills_taught': skills,
-                'career_relevance': career_paths
-            })
-        
-        except json.JSONDecodeError:
-            # Fallback to default values
-            course.skills_taught = DEFAULT_SKILLS
-            course.career_relevance = DEFAULT_CAREER_PATHS
-    
-    except Exception as e:
-        print(f"Error enhancing course {course.course_id}: {e}")
-        # Fallback to default values
-        course.skills_taught = DEFAULT_SKILLS
+    if not course.career_relevance:
         course.career_relevance = DEFAULT_CAREER_PATHS
+    
+    # Update cache with new enhancement
+    CourseEnhancementCache.update_enhancement(course.course_id, {
+        'skills_taught': course.skills_taught,
+        'career_relevance': course.career_relevance
+    })
     
     return course
 
-def enhance_courses_from_csv(courses: List[Course], ai_processor) -> List[Course]:
-    """
-    Enhance multiple courses with caching
-    
-    Args:
-        courses (List[Course]): Courses to enhance
-        ai_processor (AIProcessor): AI processor for generating enhancements
-    
-    Returns:
-        List[Course] with enhancements
-    """
-    # Load the cache once at the beginning
-    cache = CourseEnhancementCache.load_cache()
-    
-    enhanced_courses = []
-    courses_to_update = {}
-    
-    # First pass - use cache for all available courses
-    for course in courses:
-        course_id = course.course_id
-        if course_id in cache:
-            # Use cached data
-            print(f"Using cached enhancement for {course_id}")
-            enhancement = cache[course_id]
-            course.skills_taught = enhancement.get('skills_taught', DEFAULT_SKILLS)
-            course.career_relevance = enhancement.get('career_relevance', DEFAULT_CAREER_PATHS)
-        else:
-            # Mark for processing
-            if ai_processor:
-                courses_to_update[course_id] = course
-            else:
-                # Use defaults if no AI processor
-                course.skills_taught = DEFAULT_SKILLS
-                course.career_relevance = DEFAULT_CAREER_PATHS
-        
-        enhanced_courses.append(course)
-    
-    # Only process uncached courses
-    if courses_to_update and ai_processor:
-        print(f"Processing {len(courses_to_update)} uncached courses")
-        for course_id, course in courses_to_update.items():
-            # Process with AI
-            try:
-                # [AI processing code from enhance_course_data function]
-                # ...
-                
-                # Update cache directly
-                cache[course_id] = {
-                    'skills_taught': course.skills_taught,
-                    'career_relevance': course.career_relevance
-                }
-            except Exception as e:
-                print(f"Error enhancing course {course_id}: {e}")
-        
-        # Save cache once after all processing
-        CourseEnhancementCache.save_cache(cache)
-    
-    return enhanced_courses
 
 def add_ai_response_method(ai_processor_class):
     """
